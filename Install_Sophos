@@ -1,0 +1,18 @@
+#!/bin/bash
+
+#This script downloads the Sophos zip file into a directory, unzips, and installs them.
+
+# Create temporary folder where Sophos files will be downloaded to
+/bin/mkdir '/tmp/Sophos'
+
+#Download hosted Sophos file
+/usr/bin/curl -L -o /tmp/Sophos/Sophos.zip "URL HERE"
+
+#Unzips the downloaded Zip files
+/usr/bin/unzip /tmp/Sophos/Sophos.zip -d /tmp/Sophos/
+
+# Run the Sophos installer app
+/tmp/Sophos/Sophos\ Installer.app/Contents/MacOS/Sophos\ Installer --install
+
+# Remove the Sophos downloads
+/bin/rm -R '/tmp/Sophos'

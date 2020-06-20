@@ -1,0 +1,5 @@
+#!/bin/bash
+export MY_NAME="desired-computer-name"
+scutil --set ComputerName "$MY_NAME"
+scutil --set HostName "$MY_NAME"
+scutil --set LocalHostName "$MY_NAME"

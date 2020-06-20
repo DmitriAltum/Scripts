@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Parse and check that machine is on Catalina, this is untested on anything else.
+version=$(/usr/bin/sw_vers -buildVersion | /usr/bin/cut -c 1- 2)if [[ version -eq "19" ]]; then
+
+# Retrieve the plain text of the user with the most hours on the machine
+username=$(/usr/sbin/ac -p | /usr/bin/sort -nrk 2 | /usr/b in/tail -n 1 | /usr/bin/cut -d' ' -f 1 | /usr/bin/sed -e 's/^ [[:space:]]*//')
+
+# Retrieve the human-readable model name of the machine, and clean up
+/usr/sbin/system_profiler SPHardwareDataType -xml > /tmp/s phardwaredatatype.plist
+
+machine=$(/usr/libexec/PlistBuddy -c "Print 0:_items:0:mac hine_name" /tmp/sphardwaredatatype.plist)
+
+/bin/rm /tmp/sphardwaredatatype.plist
+
+# Set the human-readable name
+/usr/sbin/scutil --set ComputerName "$username's $machine"
+
+# Reparse machine name for localhostname
+machine=$(/bin/echo $machine | /usr/bin/sed -e 's/ /-/')
+
+# Set the localhostname
+/usr/sbin/scutil --set LocalHostName "$username-$machine"
+fi

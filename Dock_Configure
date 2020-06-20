@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# This script downloads Dockutil (OSS) into a temporary directory, installs it, removes the .pkg, then uses the application to configure the macOS dock.
+
+#Create temporary folder where we will be downloading the dock util package to
+/bin/mkdir '/tmp/dockutil'
+
+#Download the hosted pkg for dockutil which we will be using t o remove dock icons
+/usr/bin/curl -o '/tmp/dockutil/dockutil-2.0.5.pkg' 'https://s torage.googleapis.com/package-bucket/dockutil-2.0.5.pkg'
+
+#Install pkg previously downloaded
+/usr/sbin/installer -pkg '/tmp/dockutil/dockutil-2.0.5.pkg' -target /
+
+#Remove temporary installer location
+/bin/rm -R '/tmp/dockutil'
+
+#Start by removing everything from the dock. Finder and the bi n will not remove. New icons populate from right of Finder
+/usr/local/bin/dockutil --remove all --allhomes --no-restart
+
+#Begin adding new icons based on their application path
+/usr/local/bin/dockutil --add '/Applications/APPNAMEHERE.app' --allhomes --no-restart
+
+#Kill the dock to bring in the new settings
+/usr/bin/killall Dock

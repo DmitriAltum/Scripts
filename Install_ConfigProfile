@@ -1,0 +1,15 @@
+#!/bin/bash
+
+#This script will download and install a custom profile the customer has created, which is a somewhat frequent request. Many customers use ProfileCreator to create the custom profiles.
+
+#Create directory for downloading the .mobileconfig
+/bin/mkdir "/tmp/mobileconfig"
+
+# Download the hosted .mobileconfig
+/usr/bin/curl -o "/tmp/mobileconfig/FILE_NAME_HERE" 'HOSTED URL HERE'
+
+# Install the .mobileconfig
+/usr/bin/profiles -I -F "/tmp/mobileconfig/FILE_NAME_HERE"
+
+# Removes the .mobileconfig (if needed)
+/usr/bin/rm "/tmp/mobileconfig/FILE_NAME_HERE"

@@ -1,0 +1,20 @@
+#!/bin/bash
+
+#Creates a function to set the environment for the currently l ogged in user.
+runAsUser() {
+
+#Pulls the logged in user from console and sets user "variable" to it.
+user=$(stat -f%Su /dev/console)
+
+#Sets the UID vaiable to the ID of the user variable as long a s it is not empty.
+if [[ $user != "" ]]; then
+uid=$(id -u "$user")
+
+#Runs launchctl as the user ID with the passed information (os ascript command)
+launchctl asuser $uid "$@"
+else echo "no user logged in"
+exit 1
+fi
+}
+
+runAsUser /usr/bin/osascript -e "display notification \"Hello \" with title \"Test\""
