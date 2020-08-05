@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#This script downloads the Sophos zip file into a directory, unzips, and installs them.
+#This script downloads the Sophos zip file into a directory, unzips, and installs them. The need for this is created by the fact that Sophos provides a .zip file containing an installer file rather than a .app or .dmg for the installation of their AV application.
 
 # Create temporary folder where Sophos files will be downloaded to
 /bin/mkdir '/tmp/Sophos'
