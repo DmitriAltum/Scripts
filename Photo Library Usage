@@ -1,0 +1,7 @@
+#!/bin/bash
+
+#Pulls the logged in user from console and sets user "variable" to it.
+user=$(stat -f%Su /dev/console)
+
+#Runs Disk Usage command on the Photos Library directory within macOS for the specified user
+du -sh /users/$user/Pictures/Photos\ Library.photoslibrary
