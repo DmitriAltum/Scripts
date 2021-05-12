@@ -1,0 +1,9 @@
+#!/bin/bash
+
+#Pulls the logged in user from console and sets user "variable" to it.
+user=$(stat -f%Su /dev/console)
+
+#Runs Disk Usage command on the on the given directory for the user. 
+du -sh /users/$user/Downloads
+
+du -sh /users/$user/Documents
